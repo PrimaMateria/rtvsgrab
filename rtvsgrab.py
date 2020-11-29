@@ -1,3 +1,4 @@
+#!/bin/python
 import urllib3
 import re
 import json
@@ -27,7 +28,7 @@ def save_video(date, source):
 
 def get_video_data(url):
     metadata = json.loads(http.request("GET", url).data.decode('utf-8'))
-    source = metadata['clip']['sources']
+    sources = metadata['clip']['sources']
     data = dict()
     def type_filter(s): return s['type'] == 'application/x-mpegurl'
     data['src'] = next(filter(type_filter, sources))['src']
